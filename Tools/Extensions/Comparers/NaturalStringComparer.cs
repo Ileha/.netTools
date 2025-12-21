@@ -27,6 +27,7 @@ namespace Tools.Extensions.Comparers
     /// </summary>
     /// <remarks>
     /// Original Java code by Stanislav Bokach (https://stackoverflow.com/a/58249974)
+    /// based on https://gist.github.com/Nazardo/e42de483a03ec2e1ef9348e23bec4f95
     /// </remarks>
     public sealed class NaturalStringComparer : IComparer<string>
     {
