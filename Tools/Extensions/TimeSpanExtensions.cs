@@ -1,4 +1,6 @@
-﻿namespace Tools.Extensions
+﻿using System;
+
+namespace Tools.Extensions
 {
     public static class TimeSpanExtensions
     {

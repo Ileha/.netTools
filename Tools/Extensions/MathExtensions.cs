@@ -1,4 +1,7 @@
-﻿namespace Tools.Extensions
+﻿using System;
+using System.Linq;
+
+namespace Tools.Extensions
 {
     public static class MathExtensions
     {
@@ -70,8 +73,8 @@
             }
             else //the equation has two different roots
             {
-                x1 = (-b + Math.Sqrt(discriminant)) / (2 * a);
-                x2 = (-b - Math.Sqrt(discriminant)) / (2 * a);
+                x1 = (-b + MathF.Sqrt(discriminant)) / (2 * a);
+                x2 = (-b - MathF.Sqrt(discriminant)) / (2 * a);
             }
 
             return true;

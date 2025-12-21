@@ -1,4 +1,7 @@
-﻿namespace Tools.Extensions.Comparers
+﻿using System;
+using System.Collections.Generic;
+
+namespace Tools.Extensions.Comparers
 {
     public sealed class NaturalStringComparer<T> : IComparer<T>
     {
