@@ -1,0 +1,13 @@
+{
+  "name": "com.alexey-developer89.tools-unity",
+  "version": "1.0.0",
+  "displayName": "Tools.Unity",
+  "description": "Various Unity helpers and extensions",
+  "unity": "2020.3",
+  "unityRelease": "14f1",
+  "keywords": [],
+  "author": {
+    "name": "Alexey",
+    "email": "i.leha98@mail.ru"
+  }
+}
