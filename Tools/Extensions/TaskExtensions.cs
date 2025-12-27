@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+#if !UNITY_5_3_OR_NEWER
 using Microsoft.Extensions.Logging;
+#endif
 
 namespace Tools.Extensions
 {
@@ -87,7 +89,9 @@ namespace Tools.Extensions
 
         public static async ValueTask ForgetAsync(
             this Task task,
+#if !UNITY_5_3_OR_NEWER
             ILogger? logger = null,
+#endif
             [CallerFilePath] string? sourceFilePath = null,
             [CallerMemberName] string? method = null,
             [CallerLineNumber] int lineNumber = 0)
@@ -103,12 +107,16 @@ namespace Tools.Extensions
                 var message = $"{nameof(ForgetAsync)}: exception {e.GetType()} happen\n" +
                               $"called at line {lineNumber}: {sourceFilePath}:{method}";
 
+#if UNITY_5_3_OR_NEWER
+                UnityEngine.Debug.LogError(message);
+#else
                 if (logger == null)
-                    Console.WriteLine(
-                        $"{message}\n" +
-                        $"{e}");
-                else
-                    logger.LogError(e, message);
+                        Console.WriteLine(
+                            $"{message}\n" +
+                            $"{e}");
+                    else
+                        logger.LogError(e, message);
+#endif
             }
         }
 
