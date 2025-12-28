@@ -15,6 +15,8 @@ namespace Tools.Extensions
         {
             stopwatch = new Stopwatch();
 
+            return TrackExecutionTimeInternalAsync(stopwatch);
+
             async Task<T> TrackExecutionTimeInternalAsync(Stopwatch stopwatch)
             {
                 try
@@ -27,14 +29,14 @@ namespace Tools.Extensions
                     stopwatch.Stop();
                 }
             }
-
-            return TrackExecutionTimeInternalAsync(stopwatch);
         }
 
         public static Task TrackExecutionTimeAsync(this Task task, out Stopwatch stopwatch)
         {
             stopwatch = new Stopwatch();
 
+            return TrackExecutionTimeInternalAsync(stopwatch);
+
             async Task TrackExecutionTimeInternalAsync(Stopwatch stopwatch)
             {
                 try
@@ -47,12 +49,12 @@ namespace Tools.Extensions
                     stopwatch.Stop();
                 }
             }
-
-            return TrackExecutionTimeInternalAsync(stopwatch);
         }
 
         public static Task<T> TrackExecutionTimeRefAsync<T>(this Task<T> task, ref Stopwatch stopwatch)
         {
+            return TrackExecutionTimeInternalAsync(stopwatch);
+
             async Task<T> TrackExecutionTimeInternalAsync(Stopwatch stopwatch)
             {
                 try
@@ -65,12 +67,12 @@ namespace Tools.Extensions
                     stopwatch.Stop();
                 }
             }
-
-            return TrackExecutionTimeInternalAsync(stopwatch);
         }
 
         public static Task TrackExecutionTimeRefAsync(this Task task, ref Stopwatch stopwatch)
         {
+            return TrackExecutionTimeInternalAsync(stopwatch);
+
             async Task TrackExecutionTimeInternalAsync(Stopwatch stopwatch)
             {
                 try
@@ -83,8 +85,6 @@ namespace Tools.Extensions
                     stopwatch.Stop();
                 }
             }
-
-            return TrackExecutionTimeInternalAsync(stopwatch);
         }
 
         public static async ValueTask ForgetAsync(
@@ -111,11 +111,15 @@ namespace Tools.Extensions
                 UnityEngine.Debug.LogError(message);
 #else
                 if (logger == null)
-                        Console.WriteLine(
-                            $"{message}\n" +
-                            $"{e}");
-                    else
-                        logger.LogError(e, message);
+                {
+                    Console.WriteLine(
+                        $"{message}\n" +
+                        $"{e}");
+                }
+                else
+                {
+                    logger.LogError(e, message);
+                }
 #endif
             }
         }
@@ -134,7 +138,9 @@ namespace Tools.Extensions
             var completedTask = await Task.WhenAny(task, cancellationTask);
 
             if (completedTask == cancellationTask)
+            {
                 await cancellationTask;
+            }
 
             // Otherwise, return the result of the original task
             return await task;
@@ -153,7 +159,9 @@ namespace Tools.Extensions
             var completedTask = await Task.WhenAny(task, cancellationTask);
 
             if (completedTask == cancellationTask)
+            {
                 await cancellationTask;
+            }
 
             await task;
         }
