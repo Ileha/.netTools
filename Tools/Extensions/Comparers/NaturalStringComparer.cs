@@ -50,10 +50,14 @@ namespace Tools.Extensions.Comparers
             {
                 // Handle the case when one string has ended.
                 if (indexX == x.Length)
+                {
                     return indexY == y.Length ? 0 : -1;
+                }
 
                 if (indexY == y.Length)
+                {
                     return 1;
+                }
 
                 var charX = x[indexX];
                 var charY = y[indexY];
@@ -62,33 +66,46 @@ namespace Tools.Extensions.Comparers
                 {
                     // Skip leading zeroes in numbers.
                     while (indexX < x.Length && x[indexX] == '0')
+                    {
                         indexX++;
+                    }
 
                     while (indexY < y.Length && y[indexY] == '0')
+                    {
                         indexY++;
+                    }
 
                     // Find the end of numbers
                     var endNumberX = indexX;
                     var endNumberY = indexY;
 
                     while (endNumberX < x.Length && char.IsDigit(x[endNumberX]))
+                    {
                         endNumberX++;
+                    }
 
                     while (endNumberY < y.Length && char.IsDigit(y[endNumberY]))
+                    {
                         endNumberY++;
+                    }
 
                     var digitsLengthX = endNumberX - indexX;
                     var digitsLengthY = endNumberY - indexY;
 
                     // If the lengths are different, then the longer number is bigger
                     if (digitsLengthX != digitsLengthY)
+                    {
                         return digitsLengthX - digitsLengthY;
+                    }
 
                     // Compare numbers digit by digit
                     while (indexX < endNumberX)
                     {
                         if (x[indexX] != y[indexY])
+                        {
                             return x[indexX] - y[indexY];
+                        }
+
                         indexX++;
                         indexY++;
                     }
@@ -99,7 +116,9 @@ namespace Tools.Extensions.Comparers
                     var compareResult = char.ToUpperInvariant(charX).CompareTo(char.ToUpperInvariant(charY));
 
                     if (compareResult != 0)
+                    {
                         return compareResult;
+                    }
 
                     indexX++;
                     indexY++;

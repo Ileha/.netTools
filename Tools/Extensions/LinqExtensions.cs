@@ -52,7 +52,9 @@ namespace Tools.Extensions
             var elements = source.ToArray();
 
             if (elements.Length == 0)
+            {
                 yield break;
+            }
 
             // Note i > 0 to avoid final pointless iteration
             for (var i = elements.Length - 1; i > 0; i--)
@@ -72,7 +74,9 @@ namespace Tools.Extensions
         public static void AddRange<T>(this HashSet<T> set, IEnumerable<T> items)
         {
             foreach (var item in items)
+            {
                 set.Add(item);
+            }
         }
 
         [return: MaybeNull]
@@ -82,7 +86,9 @@ namespace Tools.Extensions
             using var enumerator = source.GetEnumerator();
 
             if (!enumerator.MoveNext())
+            {
                 return default;
+            }
 
             var max = enumerator.Current;
             var value = comparator(enumerator.Current);
@@ -108,7 +114,9 @@ namespace Tools.Extensions
             using var enumerator = source.GetEnumerator();
 
             if (!enumerator.MoveNext())
+            {
                 return default;
+            }
 
             var min = enumerator.Current;
             var value = comparator(enumerator.Current);
@@ -142,7 +150,9 @@ namespace Tools.Extensions
             using var enumerator = source.GetEnumerator();
 
             while (enumerator.MoveNext())
+            {
                 action?.Invoke(enumerator.Current);
+            }
         }
 
         public static void ForEach<T>(this IEnumerable<T> source, Action<T, int> action)
@@ -150,7 +160,9 @@ namespace Tools.Extensions
             using var enumerator = source.Select((data, i) => (data, i)).GetEnumerator();
 
             while (enumerator.MoveNext())
+            {
                 action?.Invoke(enumerator.Current.data, enumerator.Current.i);
+            }
         }
     }
 }
